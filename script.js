@@ -21,6 +21,7 @@ Pickup: ${pickup}
 Destination: ${destination}
 Date: ${date}
 Vehicle: ${vehicle}`;
+  // IMPORTANT: Replace XXXXXXXXXX with the actual 10-digit Indian WhatsApp number.
   const phone = '919652211193';
   window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 }
