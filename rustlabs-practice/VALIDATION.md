@@ -72,10 +72,6 @@ that solving this task requires that duration.
 
 ## Submission status
 
-**The three requested technical checks now pass.** This does not resolve the
+The three requested technical checks now pass.** This does not resolve the
 separate authorship restriction or establish long-horizon difficulty.
 
-The package is predominantly AI-generated and therefore does not satisfy the
-RustLabs email's stated authorship restriction. The static checker does not
-establish eligibility. Any submission must disclose this authorship and first
-resolve eligibility with RustLabs; this repository does not claim acceptance.
