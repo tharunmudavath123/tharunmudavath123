@@ -1,0 +1,68 @@
+name: Validate Ledger Harbor Task
+on:
+  push:
+    branches: [ai-practice-ledger-recovery]
+    paths:
+      - "rustlabs-practice/tasks/**"
+      - ".github/workflows/ledger-harbor.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        agent: [oracle, nop]
+    defaults:
+      run:
+        working-directory: rustlabs-practice
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Harbor and record runtime
+        run: |
+          python -m pip install "harbor==0.25.0"
+          python --version
+          harbor --version
+          docker version
+          docker compose version
+      - name: Run RustLabs checker
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://experts.rustlabs.ai/tools/frontierswe-check.py -o /tmp/frontierswe-check.py
+          python /tmp/frontierswe-check.py tasks/ledger-recovery | tee checker.log
+      - name: Run Harbor
+        run: |
+          set -euo pipefail
+          harbor run -p tasks/ledger-recovery -a ${{ matrix.agent }} 2>&1 | tee harbor.log
+      - name: Assert observed reward
+        env:
+          EXPECTED: ${{ matrix.agent == 'oracle' && '1' || '0' }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          rewards = list(Path("jobs").rglob("reward.txt"))
+          assert len(rewards) == 1, f"Expected one reward artifact, found {rewards}"
+          actual = float(rewards[0].read_text().strip())
+          expected = float(os.environ["EXPECTED"])
+          assert actual == expected, f"Observed {actual}; expected {expected}"
+          print(f"Verified reward: {actual:.3f}")
+          PY
+      - name: Save full run evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ledger-harbor-${{ matrix.agent }}
+          path: |
+            rustlabs-practice/checker.log
+            rustlabs-practice/harbor.log
+            rustlabs-practice/jobs/
+          retention-days: 14
