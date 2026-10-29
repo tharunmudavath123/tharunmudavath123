@@ -12,8 +12,8 @@
 | Reference with torn-tail truncation disabled | Rejected |
 | Python syntax, TOML parsing, shell syntax | Passed |
 | Docker image build | Passed on GitHub Actions |
-| `harbor run -p tasks/ledger-recovery -a oracle` | Mean **1.000**, 1 trial, 0 exceptions |
-| `harbor run -p tasks/ledger-recovery -a nop` | Mean **0.000**, 1 trial, 0 exceptions |
+| `harbor run -p tasks/ledger-recovery -a oracle` | Mean 1.000, 1 trial, 0 exceptions |
+| `harbor run -p tasks/ledger-recovery -a nop` | Mean 0.000, 1 trial, 0 exceptions |
 
 Actual checker output:
 
@@ -72,6 +72,6 @@ that solving this task requires that duration.
 
 ## Submission status
 
-The three requested technical checks now pass.** This does not resolve the
+The three requested technical checks now pass. This does not resolve the
 separate authorship restriction or establish long-horizon difficulty.
 
