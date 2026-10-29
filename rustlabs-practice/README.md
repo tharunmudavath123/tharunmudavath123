@@ -1,4 +1,7 @@
-# Ledger recovery —  Harbor practice task
+# Ledger Recovery — Harbor Practice Task
+
+A transactional database implementation challenge covering snapshot isolation,
+conflict detection, durable logs, and recovery after interrupted writes.
 
 ## What's included
 
@@ -19,8 +22,8 @@ that originality relative to all published tasks has been exhaustively checked.
 ## Validation status
 
 The [GitHub Actions run](https://github.com/tharunmudavath123/tharunmudavath123/actions/runs/40837665742)
-passed the RustLabs checker and actual Harbor runs: oracle Mean 1.000 and
-nop Mean 0.000, each with zero exceptions. See [VALIDATION.md](VALIDATION.md)
+passed the RustLabs checker and actual Harbor runs: **oracle Mean 1.000** and
+**nop Mean 0.000**, each with zero exceptions. See [VALIDATION.md](VALIDATION.md)
 for evidence and limitations. A 72000-second budget does not
 establish long-horizon difficulty; the task has not been calibrated on agents or
 human implementers. Treat this as a practice draft rather than a submission-ready
@@ -32,7 +35,8 @@ No local installation is needed for the cloud workflow: changes to task files
 on the `ai-practice-ledger-recovery` branch automatically trigger GitHub Actions.
 Open the repository's Actions tab to inspect runs and download their evidence.
 
-For a local run instead, use a Linux machine with Python 3.11+, Docker running and Harbor installed using
+For a local run, use a Linux machine with Python 3.11+, Docker running,
+and Harbor installed using
 the [official Harbor instructions](https://github.com/harbor-framework/harbor).
 Record the Harbor version and Docker version with your results. From this folder:
 
@@ -45,8 +49,9 @@ harbor run -p tasks/ledger-recovery -a nop
 
 Required outcomes are checker PASS, actual Harbor oracle Mean 1.000 and actual
 Harbor nop Mean 0.000. All three were observed in the linked cloud run. Any
-future task changes require fresh validation. Keep the full run logs and job results. Re-run the
-checker after any change because its fingerprint covers task-file contents.
+future task changes require fresh validation. Keep the full run logs and job
+results. Re-run the checker after any change because its fingerprint covers
+task-file contents.
 
 Local behavioral development check (does not need Docker):
 
