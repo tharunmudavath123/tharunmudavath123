@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+jobs/
+validation-logs/*.log
+!validation-logs/reference.log

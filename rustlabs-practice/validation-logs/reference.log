@@ -1,0 +1,14 @@
+test_checkpoint_crash_windows (__main__.LedgerTests.test_checkpoint_crash_windows) ... ok
+test_corruption_refusal_without_modification (__main__.LedgerTests.test_corruption_refusal_without_modification) ... ok
+test_every_truncation_of_final_frame (__main__.LedgerTests.test_every_truncation_of_final_frame) ... ok
+test_phantoms_aba_and_missing_reads (__main__.LedgerTests.test_phantoms_aba_and_missing_reads) ... ok
+test_protocol_snapshot_and_overlay (__main__.LedgerTests.test_protocol_snapshot_and_overlay) ... ok
+test_randomized_histories (__main__.LedgerTests.test_randomized_histories) ... ok
+test_restart_sigkill_and_lock (__main__.LedgerTests.test_restart_sigkill_and_lock) ... ok
+test_snapshot_corruption (__main__.LedgerTests.test_snapshot_corruption) ... ok
+test_write_conflicts_and_disjoint_commits (__main__.LedgerTests.test_write_conflicts_and_disjoint_commits) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 8.575s
+
+OK

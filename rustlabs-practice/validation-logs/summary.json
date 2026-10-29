@@ -1,0 +1,22 @@
+{
+  "reference": {
+    "exit_code": 0,
+    "expected_behavior_observed": true
+  },
+  "starter": {
+    "exit_code": 1,
+    "expected_behavior_observed": true
+  },
+  "missing-conflict-check": {
+    "exit_code": 1,
+    "expected_behavior_observed": true
+  },
+  "missing-crc-check": {
+    "exit_code": 1,
+    "expected_behavior_observed": true
+  },
+  "missing-torn-tail-truncation": {
+    "exit_code": 1,
+    "expected_behavior_observed": true
+  }
+}
