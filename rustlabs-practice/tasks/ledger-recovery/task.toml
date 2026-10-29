@@ -3,7 +3,7 @@ version = "1.0"
 [task]
 name = "tharunmudavath123/ledger-recovery"
 version = "0.1.0"
-description = "Implement a durable transactional JSON store with conflict detection and framed-log recovery. AI-generated practice task; difficulty uncalibrated."
+description = "Implement a durable transactional JSON store with conflict detection and framed-log recovery. "
 
 [metadata]
 difficulty = "hard"
