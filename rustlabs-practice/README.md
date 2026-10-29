@@ -27,15 +27,21 @@ that originality relative to all published tasks has been exhaustively checked.
 
 ## Validation status
 
-See [VALIDATION.md](VALIDATION.md) for actual results and limitations. Local
-Python tests are **not** Harbor oracle/nop scores. A 72000-second budget does not
+The [GitHub Actions run](https://github.com/tharunmudavath123/tharunmudavath123/actions/runs/40837665742)
+passed the RustLabs checker and actual Harbor runs: **oracle Mean 1.000** and
+**nop Mean 0.000**, each with zero exceptions. See [VALIDATION.md](VALIDATION.md)
+for evidence and limitations. A 72000-second budget does not
 establish long-horizon difficulty; the task has not been calibrated on agents or
 human implementers. Treat this as a practice draft rather than a submission-ready
 benchmark. Nine test methods cover many generated and parameterized cases.
 
 ## Run the required checks
 
-Use a Linux machine with Python 3.11+, Docker running and Harbor installed using
+No local installation is needed for the cloud workflow: changes to task files
+on the `ai-practice-ledger-recovery` branch automatically trigger GitHub Actions.
+Open the repository's Actions tab to inspect runs and download their evidence.
+
+For a local run instead, use a Linux machine with Python 3.11+, Docker running and Harbor installed using
 the [official Harbor instructions](https://github.com/harbor-framework/harbor).
 Record the Harbor version and Docker version with your results. From this folder:
 
@@ -47,8 +53,8 @@ harbor run -p tasks/ledger-recovery -a nop
 ```
 
 Required outcomes are checker PASS, actual Harbor oracle Mean 1.000 and actual
-Harbor nop Mean 0.000. These are targets until the runs complete, not promises or
-pre-filled submission answers. Keep the full run logs and job results. Re-run the
+Harbor nop Mean 0.000. All three were observed in the linked cloud run. Any
+future task changes require fresh validation. Keep the full run logs and job results. Re-run the
 checker after any change because its fingerprint covers task-file contents.
 
 Local behavioral development check (does not need Docker):
@@ -73,6 +79,6 @@ Do not execute unknown candidates on your host; use the container.
 
 ## Before considering any application
 
-Obtain a clear answer on the AI-authorship restriction, run the real Harbor
-checks, independently review the oracle and tests, and calibrate difficulty.
+Obtain a clear answer on the AI-authorship restriction, independently review the
+oracle and tests, and calibrate difficulty. Re-run Harbor after task changes.
 This repository does not claim selection, payment, or acceptance by RustLabs.
