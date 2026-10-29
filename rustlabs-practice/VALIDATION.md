@@ -23,7 +23,8 @@ FSWE-CHECK v1 PASS tharunmudavath123/ledger-recovery 04777cce0df1
 
 The checker was downloaded from
 https://experts.rustlabs.ai/tools/frontierswe-check.py and executed against the
-task folder. The fingerprint applies to these exact task-file contents.
+task folder. This fingerprint applies to the tested commit recorded below; edits to task
+files produce a different fingerprint and require a new checker run.
 
 The original local interpreter was Python 3.12.14. The Docker image based on
 Python 3.12.8 was subsequently built and tested in the cloud. See
@@ -39,8 +40,8 @@ completed on 29 October 2026 at approximately 13:18 IST. Tested commit:
 `95368680aae11068c081ca362502ab10367e9aa6`.
 
 Runtime: GitHub-hosted Ubuntu 24.04, Harbor 0.25.0, host Python 3.12.15,
-and Docker. Full Docker version output is in the job logs. The task files were
-unchanged, so the checker fingerprint remains `04777cce0df1`.
+and Docker. Full Docker version output is in the job logs. The checker fingerprint
+for that tested commit is `04777cce0df1`.
 
 - Oracle log: `1/1 Mean: 1.000`; reward artifact independently asserted as 1.
 - Nop log: `1/1 Mean: 0.000`; reward artifact independently asserted as 0.
