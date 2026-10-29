@@ -11,9 +11,9 @@
 | Reference with CRC validation disabled | Rejected |
 | Reference with torn-tail truncation disabled | Rejected |
 | Python syntax, TOML parsing, shell syntax | Passed |
-| Docker image build | NOT RUN — Docker unavailable in authoring environment |
-| `harbor run -p tasks/ledger-recovery -a oracle` | NOT RUN — Harbor and Docker unavailable |
-| `harbor run -p tasks/ledger-recovery -a nop` | NOT RUN — Harbor and Docker unavailable |
+| Docker image build | Passed on GitHub Actions |
+| `harbor run -p tasks/ledger-recovery -a oracle` | Mean **1.000**, 1 trial, 0 exceptions |
+| `harbor run -p tasks/ledger-recovery -a nop` | Mean **0.000**, 1 trial, 0 exceptions |
 
 Actual checker output:
 
@@ -25,12 +25,32 @@ The checker was downloaded from
 https://experts.rustlabs.ai/tools/frontierswe-check.py and executed against the
 task folder. The fingerprint applies to these exact task-file contents.
 
-The host interpreter was Python 3.12.14. The Dockerfile specifies Python 3.12.8;
-that container runtime has not been exercised. See
+The original local interpreter was Python 3.12.14. The Docker image based on
+Python 3.12.8 was subsequently built and tested in the cloud. See
 [reference.log](validation-logs/reference.log) and
 [summary.json](validation-logs/summary.json). Reproduce the local checks with
 `python3 check_local.py`. Mutation logs are generated locally by that script;
 only the compact summary and passing reference log are committed.
+
+## Harbor cloud run
+
+[Successful GitHub Actions run](https://github.com/tharunmudavath123/tharunmudavath123/actions/runs/40837665742)
+completed on 29 October 2026 at approximately 13:18 IST. Tested commit:
+`95368680aae11068c081ca362502ab10367e9aa6`.
+
+Runtime: GitHub-hosted Ubuntu 24.04, Harbor 0.25.0, host Python 3.12.15,
+and Docker. Full Docker version output is in the job logs. The task files were
+unchanged, so the checker fingerprint remains `04777cce0df1`.
+
+- Oracle log: `1/1 Mean: 1.000`; reward artifact independently asserted as 1.
+- Nop log: `1/1 Mean: 0.000`; reward artifact independently asserted as 0.
+- Both jobs completed successfully with zero Harbor exceptions.
+- Full logs and job results are attached to the run as `ledger-harbor-oracle`
+  and `ledger-harbor-nop`, with a 14-day artifact retention period.
+
+The workflow in `.github/workflows/ledger-harbor.yml` runs automatically when
+its file or task files change on the `ai-practice-ledger-recovery` branch.
+No local Docker or Harbor installation is necessary for that cloud workflow.
 
 ## Coverage and limits
 
@@ -41,8 +61,9 @@ commit, process locking, every truncation offset of a sample final frame, bad
 checksums, malformed record shapes, version gaps, snapshot damage, stale WAL after
 checkpoint and 100 deterministic randomized write batches with restarts.
 
-The local tests execute the implementation as a subprocess. This is not an
-end-to-end test of Harbor packaging, container permissions or reward collection.
+Local tests execute the implementation as a subprocess. The subsequent GitHub
+Actions run additionally exercised Docker builds, Harbor oracle/nop execution,
+the verifier and reward collection.
 SIGKILL and synthetic crash-window fixtures do not simulate physical power loss,
 all filesystem failure modes or all instruction-level crash points. Difficulty,
 agent success rate, performance and resistance to benchmark tampering have not
@@ -51,8 +72,8 @@ that solving this task requires that duration.
 
 ## Submission status
 
-**Not submission-ready.** No Harbor Mean scores have been measured. Do not enter
-1.000 or 0.000 into an application form as if they were observed here.
+**The three requested technical checks now pass.** This does not resolve the
+separate authorship restriction or establish long-horizon difficulty.
 
 The package is predominantly AI-generated and therefore does not satisfy the
 RustLabs email's stated authorship restriction. The static checker does not
